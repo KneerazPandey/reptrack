@@ -27,7 +27,6 @@ class AppColors {
   static const Color darkPrimary = Color(0xFF818CF8);
   static const Color darkOnPrimary = Color(0xFFFFFFFF);
   static const Color darkPrimaryContainer = Color(0xFF312E81);
-  static const Color darkSurface = Color(0xFF1E1E2A);
   static const Color darkSurfaceVariant = Color(0xFF2A2A3A);
   static const Color darkBackground = Color(0xFF121218);
   static const Color darkOutline = Color(0xFF3A3A4A);
@@ -48,4 +47,12 @@ class AppColors {
   static const Color splashBackgroundBottom = Color(0xFF1A1B4B);
   static const Color splashLogoOuter = Color(0xFF7A7BFF);
   static const Color splashLogoInner = Color(0xFF5B5CFF);
+
+  // New Dark Theme Colors
+  static const Color darkBg = Color(0xFF0F0F0F); // Very dark grey/black
+  static const Color darkSurface = Color(0xFF1A1A1A);
+  static const Color neonPrimary = Color(0xFFA8FF35); // Lime green
+  static const Color neonBlue = Color(0xFF3B82F6); // For the "+3 partial" badge
+  static const Color textWhite = Color(0xFFFFFFFF);
+  static const Color textGrey = Color(0xFF9CA3AF);
 }
