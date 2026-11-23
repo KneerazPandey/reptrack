@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:reptrack/core/theme/app_colors.dart';
 import 'package:reptrack/core/theme/app_spacing.dart';
+import 'package:reptrack/core/theme/theme_extensions.dart';
 
 class ResetDataDialog extends StatefulWidget {
   const ResetDataDialog({super.key});
@@ -37,7 +38,7 @@ class _ResetDataDialogState extends State<ResetDataDialog> {
   @override
   Dialog build(BuildContext context) {
     return Dialog(
-      backgroundColor: const Color(0xFF1A1A1A), // Dark grey background
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       insetPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.xl),
       child: Padding(
@@ -65,10 +66,10 @@ class _ResetDataDialogState extends State<ResetDataDialog> {
             const SizedBox(height: AppSpacing.lg),
 
             // ---------- Title ----------
-            const Text(
+            Text(
               'Reset all data?',
               style: TextStyle(
-                color: AppColors.textWhite,
+                color: context.colors.onSurface,
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
                 letterSpacing: -0.5,
@@ -78,10 +79,10 @@ class _ResetDataDialogState extends State<ResetDataDialog> {
             const SizedBox(height: AppSpacing.sm),
 
             // ---------- Description ----------
-            const Text(
+            Text(
               'This permanently deletes all splits, sessions, sets and bodyweight entries on this device. Export a backup first if you might need it.',
               style: TextStyle(
-                color: AppColors.textGrey,
+                color: context.colors.onSurfaceVariant,
                 fontSize: 14,
                 height: 1.5,
               ),
@@ -90,10 +91,10 @@ class _ResetDataDialogState extends State<ResetDataDialog> {
             const SizedBox(height: AppSpacing.xl),
 
             // ---------- Input Label ----------
-            const Text(
+            Text(
               'TYPE RESET TO CONFIRM',
               style: TextStyle(
-                color: AppColors.textGrey,
+                color: context.colors.onSurface,
                 fontSize: 11,
                 fontWeight: FontWeight.w700,
                 letterSpacing: 1.0,
@@ -104,21 +105,19 @@ class _ResetDataDialogState extends State<ResetDataDialog> {
             // ---------- Input Field ----------
             TextField(
               controller: _confirmController,
-              style: const TextStyle(
-                color: AppColors.textWhite,
+              style: TextStyle(
+                color: context.colors.onSurface,
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),
-              cursorColor: AppColors.danger,
+              cursorColor: context.colors.error,
               decoration: InputDecoration(
                 hintText: _confirmWord, // Using the exact word as a placeholder
                 hintStyle: TextStyle(
-                  color: AppColors.danger.withValues(alpha: 0.3),
+                  color: context.colors.error.withValues(alpha: .6),
                 ),
                 filled: true,
-                fillColor: const Color(
-                  0xFF222222,
-                ), // Slightly lighter than background
+                fillColor: context.colors.surfaceContainerHighest,
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: AppSpacing.md,
                   vertical: 16,
@@ -153,19 +152,16 @@ class _ResetDataDialogState extends State<ResetDataDialog> {
                 // Only active if the correct word is typed
                 onPressed: _isConfirmed
                     ? () {
-                        // TODO: Execute delete logic here
-                        // Hive.box('user_profile').clear();
-                        // Hive.box('splits').clear();
-                        // Hive.box('sessions').clear();
-
                         Navigator.pop(context); // Close dialog
                       }
                     : null,
                 style: FilledButton.styleFrom(
-                  backgroundColor: AppColors.danger,
-                  foregroundColor: Colors.white,
-                  disabledBackgroundColor: const Color(0xFF333333),
-                  disabledForegroundColor: AppColors.textGrey,
+                  backgroundColor: context.colors.error,
+                  foregroundColor: context.colors.onSurface,
+                  disabledBackgroundColor: AppColors.danger.withValues(
+                    alpha: 0.4,
+                  ),
+                  disabledForegroundColor: context.colors.onSurface,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
@@ -186,15 +182,19 @@ class _ResetDataDialogState extends State<ResetDataDialog> {
               child: OutlinedButton(
                 onPressed: () => Navigator.pop(context),
                 style: OutlinedButton.styleFrom(
-                  foregroundColor: AppColors.textWhite,
+                  foregroundColor: AppColors.darkTextPrimary,
                   side: const BorderSide(color: Color(0xFF444444), width: 1.5),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
                 ),
-                child: const Text(
+                child: Text(
                   'Cancel',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: context.colors.onSurface,
+                  ),
                 ),
               ),
             ),

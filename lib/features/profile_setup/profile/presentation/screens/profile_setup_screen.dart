@@ -3,6 +3,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:reptrack/core/router/app_routes.dart';
 import 'package:reptrack/core/theme/app_colors.dart';
 import 'package:reptrack/core/theme/app_spacing.dart';
+import 'package:reptrack/core/theme/theme_extensions.dart';
 import 'package:reptrack/core/widgets/reptrack_elevated_button.dart';
 
 class ProfileSetupScreen extends StatefulWidget {
@@ -29,7 +30,7 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.darkBg,
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       body: GestureDetector(
         onTap: () {
           FocusScope.of(context).unfocus();
@@ -65,8 +66,8 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
                                     margin: const EdgeInsets.only(right: 6),
                                     decoration: BoxDecoration(
                                       color: isActive
-                                          ? AppColors.neonPrimary
-                                          : const Color(0xFF2A2A2A),
+                                          ? context.colors.primary
+                                          : context.colors.onSurfaceVariant,
                                       borderRadius: BorderRadius.circular(4),
                                     ),
                                   );
@@ -83,14 +84,15 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
                                   tapTargetSize:
                                       MaterialTapTargetSize.shrinkWrap,
                                 ),
-                                child: const Text(
+                                child: Text(
                                   'Skip',
                                   style: TextStyle(
-                                    color: AppColors.textGrey,
+                                    color: context.colors.onSurfaceVariant,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500,
                                     decoration: TextDecoration.underline,
-                                    decorationColor: AppColors.textGrey,
+                                    decorationColor:
+                                        AppColors.darkTextSecondary,
                                   ),
                                 ),
                               ),
@@ -109,20 +111,20 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
                               const SizedBox(height: AppSpacing.xl),
 
                               // Step Title
-                              const Text(
+                              Text(
                                 'STEP 1 OF 4',
                                 style: TextStyle(
-                                  color: AppColors.textGrey,
+                                  color: context.colors.onSurface,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w700,
                                   letterSpacing: 1.2,
                                 ),
                               ),
                               const SizedBox(height: AppSpacing.xs),
-                              const Text(
+                              Text(
                                 'What should we call you?',
                                 style: TextStyle(
-                                  color: AppColors.textWhite,
+                                  color: context.colors.onSurface,
                                   fontSize: 28,
                                   fontWeight: FontWeight.w800,
                                   height: 1.2,
@@ -130,10 +132,10 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
                                 ),
                               ),
                               const SizedBox(height: AppSpacing.sm),
-                              const Text(
+                              Text(
                                 'Your name and photo are stored only on this device.',
                                 style: TextStyle(
-                                  color: AppColors.textGrey,
+                                  color: context.colors.onSurfaceVariant,
                                   fontSize: 14,
                                   height: 1.4,
                                 ),
@@ -145,25 +147,25 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
                               Row(
                                 children: [
                                   GestureDetector(
-                                    onTap: () {
-                                      // TODO: Integrate image_picker package
-                                    },
+                                    onTap: () {},
                                     child: Container(
                                       width: 64,
                                       height: 64,
-                                      decoration: const BoxDecoration(
-                                        color: Color(0xFF1A1A1A),
+                                      decoration: BoxDecoration(
+                                        color: context
+                                            .colors
+                                            .surfaceContainerHighest,
                                         shape: BoxShape.circle,
                                       ),
-                                      child: const Icon(
+                                      child: Icon(
                                         Icons.person_outline_rounded,
-                                        color: AppColors.textWhite,
+                                        color: context.colors.onSurface,
                                         size: 32,
                                       ),
                                     ),
                                   ),
                                   const SizedBox(width: AppSpacing.md),
-                                  const Expanded(
+                                  Expanded(
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -171,7 +173,7 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
                                         Text(
                                           'Profile photo',
                                           style: TextStyle(
-                                            color: AppColors.textWhite,
+                                            color: context.colors.onSurface,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w600,
                                           ),
@@ -180,7 +182,8 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
                                         Text(
                                           'Optional. Tap to choose from gallery.',
                                           style: TextStyle(
-                                            color: AppColors.textGrey,
+                                            color:
+                                                context.colors.onSurfaceVariant,
                                             fontSize: 13,
                                           ),
                                         ),
@@ -193,10 +196,10 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
                               const SizedBox(height: AppSpacing.xl),
 
                               // Name Input Field
-                              const Text(
+                              Text(
                                 'NAME',
                                 style: TextStyle(
-                                  color: AppColors.textGrey,
+                                  color: context.colors.onSurface,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w700,
                                   letterSpacing: 1.0,
@@ -205,21 +208,20 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
                               const SizedBox(height: AppSpacing.xs),
                               TextField(
                                 controller: _nameController,
-                                style: const TextStyle(
-                                  color: AppColors.textWhite,
+                                style: TextStyle(
+                                  color: context.colors.onSurface,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
                                 ),
-                                cursorColor: AppColors.neonPrimary,
+                                cursorColor: AppColors.primaryDark,
                                 decoration: InputDecoration(
                                   hintText: 'Enter your name',
                                   hintStyle: TextStyle(
-                                    color: AppColors.textGrey.withValues(
-                                      alpha: 0.5,
-                                    ),
+                                    color: context.colors.onSurface,
                                   ),
                                   filled: true,
-                                  fillColor: const Color(0xFF1A1A1A),
+                                  fillColor:
+                                      context.colors.surfaceContainerHighest,
                                   contentPadding: const EdgeInsets.symmetric(
                                     horizontal: AppSpacing.md,
                                     vertical: 18,
@@ -228,14 +230,16 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(12),
                                     borderSide: BorderSide(
-                                      color: Colors.transparent,
+                                      color: context
+                                          .colors
+                                          .surfaceContainerHighest,
                                       width: 1.5,
                                     ),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(12),
-                                    borderSide: const BorderSide(
-                                      color: AppColors.neonPrimary,
+                                    borderSide: BorderSide(
+                                      color: context.colors.primary,
                                       width: 1.5,
                                     ),
                                   ),

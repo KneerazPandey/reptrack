@@ -1,11 +1,11 @@
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:reptrack/core/router/app_routes.dart';
-// import 'package:reptrack/core/services/bootstrap_service.dart';
 
-import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_spacing.dart';
 import '../widgets/animated_logo.dart';
+
+import 'package:reptrack/core/theme/app_colors.dart';
+import 'package:reptrack/core/theme/app_spacing.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen>
       if (!mounted) return;
       _phase = _SplashPhase.ready;
       if (_phase == _SplashPhase.ready) {
-        context.go(AppRoutes.onboarding);
+        context.go(AppRoutes.welcome);
       }
     } catch (e, st) {
       debugPrint('[Splash] Bootstrap failed: $e\n$st');

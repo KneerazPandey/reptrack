@@ -1,21 +1,15 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:reptrack/core/router/app_router.dart';
+import 'package:reptrack/app.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
-}
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  await Hive.initFlutter();
+  await Hive.openBox('settings');
+  final box = Hive.box('settings');
+  debugPrint('Saved theme: ${box.get('themeMode', defaultValue: 0)}');
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'Flutter Demo',
-      routerConfig: AppRouter.router,
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      debugShowCheckedModeBanner: false,
-    );
-  }
+  runApp(ProviderScope(child: const RepTrackApp()));
 }

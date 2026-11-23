@@ -3,19 +3,23 @@ import 'package:material_ui/material_ui.dart';
 import 'package:reptrack/core/router/app_routes.dart';
 import 'package:reptrack/core/theme/app_colors.dart';
 import 'package:reptrack/core/theme/app_spacing.dart';
+import 'package:reptrack/core/theme/theme_extensions.dart';
 import 'package:reptrack/core/widgets/reptrack_elevated_button.dart';
 import 'package:reptrack/features/welcome/presentation/widgets/welcome_ring_painter.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  const new({super.key});
+  const WelcomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.darkBg,
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppSpacing.xl),
+          padding: EdgeInsets.symmetric(
+            horizontal: AppSpacing.xl,
+            vertical: AppSpacing.md,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -26,20 +30,20 @@ class WelcomeScreen extends StatelessWidget {
                     width: 40,
                     height: 40,
                     decoration: BoxDecoration(
-                      color: AppColors.neonPrimary,
+                      color: context.colors.primary,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.fitness_center_rounded,
-                      color: Colors.black,
+                      color: context.colors.onPrimary,
                       size: 22,
                     ),
                   ),
                   const SizedBox(width: AppSpacing.sm),
-                  const Text(
+                  Text(
                     'RepTrack',
                     style: TextStyle(
-                      color: AppColors.textWhite,
+                      color: context.colors.onSurface,
                       fontSize: 20,
                       fontWeight: FontWeight.w700,
                       letterSpacing: -0.5,
@@ -65,8 +69,9 @@ class WelcomeScreen extends StatelessWidget {
                           painter: WelcomeRingPainter(
                             progress: 0.75,
                             strokeWidth: 12,
-                            activeColor: AppColors.neonPrimary,
-                            inactiveColor: const Color(0xFF2A2A2A),
+                            activeColor: context.colors.primary,
+                            inactiveColor:
+                                context.colors.surfaceContainerHighest,
                           ),
                         ),
                       ),
@@ -75,10 +80,10 @@ class WelcomeScreen extends StatelessWidget {
                       Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Text(
+                          Text(
                             '12',
                             style: TextStyle(
-                              color: AppColors.textWhite,
+                              color: context.colors.onSurface,
                               fontSize: 84,
                               fontWeight: FontWeight.w800,
                               height: 1.0,
@@ -86,10 +91,10 @@ class WelcomeScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 4),
-                          const Text(
+                          Text(
                             'FULL REPS',
                             style: TextStyle(
-                              color: AppColors.textGrey,
+                              color: context.colors.onSurfaceVariant,
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
                               letterSpacing: 1.5,
@@ -104,7 +109,7 @@ class WelcomeScreen extends StatelessWidget {
                               vertical: 4,
                             ),
                             decoration: BoxDecoration(
-                              color: AppColors.neonBlue,
+                              color: AppColors.info,
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: const Text(
@@ -126,10 +131,10 @@ class WelcomeScreen extends StatelessWidget {
               Spacer(),
 
               // ---------- Text Content ----------
-              const Text(
+              Text(
                 'Count every rep.\nOwn every set.',
                 style: TextStyle(
-                  color: AppColors.textWhite,
+                  color: context.colors.onSurface,
                   fontSize: 32,
                   fontWeight: FontWeight.w700,
                   height: 1.2,
@@ -137,10 +142,10 @@ class WelcomeScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: AppSpacing.md),
-              const Text(
+              Text(
                 'Splits, sets, partial reps and rest timers.\nWorks fully offline. No ads, no tracking.',
                 style: TextStyle(
-                  color: AppColors.textGrey,
+                  color: context.colors.onSurfaceVariant,
                   fontSize: 15,
                   fontWeight: FontWeight.w400,
                   height: 1.5,
@@ -160,11 +165,11 @@ class WelcomeScreen extends StatelessWidget {
               const SizedBox(height: AppSpacing.md),
 
               // ---------- Footer Text ----------
-              const Center(
+              Center(
                 child: Text(
                   'All data stays on this phone.',
                   style: TextStyle(
-                    color: AppColors.textGrey,
+                    color: context.colors.onSurface,
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
                   ),

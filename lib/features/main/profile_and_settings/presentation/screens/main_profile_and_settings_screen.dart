@@ -3,6 +3,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:reptrack/core/router/app_routes.dart';
 import 'package:reptrack/core/theme/app_colors.dart';
 import 'package:reptrack/core/theme/app_spacing.dart';
+import 'package:reptrack/core/theme/theme_extensions.dart';
 import 'package:reptrack/features/main/profile_and_settings/presentation/widgets/reset_data_dialog.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -18,7 +19,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.darkBg,
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       body: SafeArea(
         bottom: false,
         child: SingleChildScrollView(
@@ -29,10 +30,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               const SizedBox(height: AppSpacing.md),
 
               // ---------- Header ----------
-              const Text(
+              Text(
                 'Profile',
                 style: TextStyle(
-                  color: AppColors.textWhite,
+                  color: context.colors.onSurface,
                   fontSize: 28,
                   fontWeight: FontWeight.w800,
                   letterSpacing: -0.5,
@@ -44,7 +45,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Container(
                 padding: const EdgeInsets.all(AppSpacing.md),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF1A1A1A),
+                  color: context.colors.surface,
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Row(
@@ -53,15 +54,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Container(
                       width: 56,
                       height: 56,
-                      decoration: const BoxDecoration(
-                        color: Color(0xFF2A2A2A), // Dark grey circle
+                      decoration: BoxDecoration(
+                        color: context
+                            .colors
+                            .surfaceContainerHighest, // Dark grey circle
                         shape: BoxShape.circle,
                       ),
                       alignment: Alignment.center,
-                      child: const Text(
+                      child: Text(
                         'N',
                         style: TextStyle(
-                          color: AppColors.neonPrimary,
+                          color: context.colors.primary,
                           fontSize: 24,
                           fontWeight: FontWeight.w700,
                         ),
@@ -70,14 +73,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     const SizedBox(width: AppSpacing.md),
 
                     // Name & Details
-                    const Expanded(
+                    Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             'Niraj',
                             style: TextStyle(
-                              color: AppColors.textWhite,
+                              color: context.colors.onSurface,
                               fontSize: 18,
                               fontWeight: FontWeight.w700,
                             ),
@@ -86,7 +89,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Text(
                             '78.5 kg · goal 5 days a week',
                             style: TextStyle(
-                              color: AppColors.textGrey,
+                              color: context.colors.onSurfaceVariant,
                               fontSize: 13,
                               fontWeight: FontWeight.w400,
                             ),
@@ -98,13 +101,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     // Edit Icon
                     Container(
                       padding: const EdgeInsets.all(8),
-                      decoration: const BoxDecoration(
-                        color: Color(0xFF2A2A2A),
+                      decoration: BoxDecoration(
+                        color: context.colors.surfaceContainerHighest,
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.edit_outlined,
-                        color: AppColors.textWhite,
+                        color: context.colors.onSurface,
                         size: 18,
                       ),
                     ),
@@ -117,7 +120,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               // ---------- Group 1: Settings List ----------
               Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFF1A1A1A),
+                  color: context.colors.surface,
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Column(
@@ -138,7 +141,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                     _buildSettingsRow(
                       title: 'Appearance',
-                      onTap: () {},
+                      onTap: () {
+                        context.push(AppRoutes.appearance);
+                      },
                       trailingText: 'Dark',
                     ),
                     _buildDivider(),
@@ -150,20 +155,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       child: Row(
                         children: [
-                          const Expanded(
+                          Expanded(
                             child: Text(
                               'Daily reminder',
                               style: TextStyle(
-                                color: AppColors.textWhite,
+                                color: context.colors.onSurface,
                                 fontSize: 15,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
                           ),
-                          const Text(
+                          Text(
                             '18:00',
                             style: TextStyle(
-                              color: AppColors.textGrey,
+                              color: context.colors.onSurfaceVariant,
                               fontSize: 14,
                             ),
                           ),
@@ -174,6 +179,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             onChanged: (val) {
                               setState(() => _dailyReminderEnabled = val);
                             },
+                            primaryColor: context.colors.primary,
+                            trackColor: context.colors.surfaceContainerHighest,
                           ),
                         ],
                       ),
@@ -190,7 +197,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               // ---------- Group 2: Data Actions ----------
               Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFF1A1A1A),
+                  color: context.colors.surface,
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Column(
@@ -211,7 +218,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           builder: (BuildContext context) => ResetDataDialog(),
                         );
                       },
-                      child: const Padding(
+                      child: Padding(
                         padding: EdgeInsets.symmetric(
                           horizontal: AppSpacing.md,
                           vertical: 16,
@@ -222,7 +229,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               child: Text(
                                 'Reset all data',
                                 style: TextStyle(
-                                  color: AppColors.danger, // Red color
+                                  color: context.colors.error,
                                   fontSize: 15,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -239,11 +246,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               const SizedBox(height: AppSpacing.xl),
 
               // ---------- Footer ----------
-              const Center(
+              Center(
                 child: Text(
                   'RepTrack · offline · no ads · no tracking',
                   style: TextStyle(
-                    color: AppColors.textGrey,
+                    color: context.colors.onSurfaceVariant,
                     fontSize: 11,
                     fontWeight: FontWeight.w500,
                   ),
@@ -276,8 +283,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Expanded(
               child: Text(
                 title,
-                style: const TextStyle(
-                  color: AppColors.textWhite,
+                style: TextStyle(
+                  color: context.colors.onSurface,
                   fontSize: 15,
                   fontWeight: FontWeight.w500,
                 ),
@@ -286,13 +293,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
             if (trailingText != null) ...[
               Text(
                 trailingText,
-                style: const TextStyle(color: AppColors.textGrey, fontSize: 14),
+                style: const TextStyle(
+                  color: AppColors.darkTextSecondary,
+                  fontSize: 14,
+                ),
               ),
               const SizedBox(width: 4),
             ],
             const Icon(
               Icons.chevron_right_rounded,
-              color: AppColors.textGrey,
+              color: AppColors.darkTextSecondary,
               size: 20,
             ),
           ],
@@ -303,10 +313,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   // --- Helper Widget for dividers ---
   Widget _buildDivider() {
-    return const Divider(
+    return Divider(
       height: 1,
       thickness: 1,
-      color: Color(0xFF2A2A2A), // Subtle dark line
+      color: context.colors.outline,
       indent: AppSpacing.md,
       endIndent: AppSpacing.md,
     );
@@ -316,6 +326,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget _buildCustomSwitch({
     required bool value,
     required ValueChanged<bool> onChanged,
+    required Color primaryColor,
+    required Color trackColor,
   }) {
     return GestureDetector(
       onTap: () => onChanged(!value),
@@ -325,7 +337,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         height: 26,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(13),
-          color: value ? AppColors.neonPrimary : const Color(0xFF333333),
+          color: value ? primaryColor : trackColor,
         ),
         child: AnimatedAlign(
           duration: const Duration(milliseconds: 200),
@@ -336,8 +348,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Container(
               width: 22,
               height: 22,
-              decoration: const BoxDecoration(
-                color: Colors.black, // Dark thumb
+              decoration: BoxDecoration(
+                color: context.colors.onPrimary, // Dark thumb
                 shape: BoxShape.circle,
               ),
             ),

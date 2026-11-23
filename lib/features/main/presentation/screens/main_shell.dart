@@ -11,7 +11,7 @@ class MainShell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.darkBg,
+      backgroundColor: AppColors.darkBackground,
       body: navigationShell,
       bottomNavigationBar: CustomBottomNav(
         currentIndex: navigationShell.currentIndex,

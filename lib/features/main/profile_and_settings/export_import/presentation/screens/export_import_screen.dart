@@ -9,7 +9,7 @@ class ExportImportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.darkBg,
+      backgroundColor: AppColors.darkBackground,
       body: SafeArea(
         bottom: false,
         child: SingleChildScrollView(
@@ -33,7 +33,7 @@ class ExportImportScreen extends StatelessWidget {
                       ),
                       child: const Icon(
                         Icons.arrow_back_ios_new_rounded,
-                        color: AppColors.textWhite,
+                        color: AppColors.darkTextPrimary,
                         size: 18,
                       ),
                     ),
@@ -42,7 +42,7 @@ class ExportImportScreen extends StatelessWidget {
                   const Text(
                     'Export and import',
                     style: TextStyle(
-                      color: AppColors.textWhite,
+                      color: AppColors.darkTextPrimary,
                       fontSize: 22,
                       fontWeight: FontWeight.w700,
                       letterSpacing: -0.5,
@@ -57,7 +57,7 @@ class ExportImportScreen extends StatelessWidget {
               const Text(
                 'Your data lives only on this phone. Export a backup to keep it safe or move to a new device.',
                 style: TextStyle(
-                  color: AppColors.textGrey,
+                  color: AppColors.darkTextSecondary,
                   fontSize: 14,
                   height: 1.5,
                 ),
@@ -80,7 +80,7 @@ class ExportImportScreen extends StatelessWidget {
                       children: [
                         const Icon(
                           Icons.file_download_outlined,
-                          color: AppColors.neonPrimary,
+                          color: AppColors.primaryDark,
                           size: 24,
                         ),
                         const SizedBox(width: AppSpacing.sm),
@@ -91,7 +91,7 @@ class ExportImportScreen extends StatelessWidget {
                               Text(
                                 'Export',
                                 style: TextStyle(
-                                  color: AppColors.textWhite,
+                                  color: AppColors.darkTextPrimary,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -100,7 +100,7 @@ class ExportImportScreen extends StatelessWidget {
                               Text(
                                 'Splits, sessions, sets, bodyweight',
                                 style: TextStyle(
-                                  color: AppColors.textGrey,
+                                  color: AppColors.darkTextSecondary,
                                   fontSize: 13,
                                 ),
                               ),
@@ -124,7 +124,7 @@ class ExportImportScreen extends StatelessWidget {
                                 // _exportData(context, format: 'json');
                               },
                               style: FilledButton.styleFrom(
-                                backgroundColor: AppColors.neonPrimary,
+                                backgroundColor: AppColors.primaryDark,
                                 foregroundColor: Colors.black,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(
@@ -153,7 +153,7 @@ class ExportImportScreen extends StatelessWidget {
                                 // _exportData(context, format: 'csv');
                               },
                               style: OutlinedButton.styleFrom(
-                                foregroundColor: AppColors.textWhite,
+                                foregroundColor: AppColors.darkTextPrimary,
                                 side: const BorderSide(
                                   color: Color(0xFF444444),
                                   width: 1.5,
@@ -197,7 +197,7 @@ class ExportImportScreen extends StatelessWidget {
                       children: [
                         const Icon(
                           Icons.file_upload_outlined,
-                          color: AppColors.neonPrimary, // Light blue in your image, but keeping neon for consistency
+                          color: AppColors.primaryDark, // Light blue in your image, but keeping neon for consistency
                           size: 24,
                         ),
                         const SizedBox(width: AppSpacing.sm),
@@ -208,7 +208,7 @@ class ExportImportScreen extends StatelessWidget {
                               Text(
                                 'Import',
                                 style: TextStyle(
-                                  color: AppColors.textWhite,
+                                  color: AppColors.darkTextPrimary,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -217,7 +217,7 @@ class ExportImportScreen extends StatelessWidget {
                               Text(
                                 'Restore from a RepTrack JSON file',
                                 style: TextStyle(
-                                  color: AppColors.textGrey,
+                                  color: AppColors.darkTextSecondary,
                                   fontSize: 13,
                                 ),
                               ),
@@ -238,7 +238,7 @@ class ExportImportScreen extends StatelessWidget {
                           // _pickAndImportFile(context);
                         },
                         style: OutlinedButton.styleFrom(
-                          foregroundColor: AppColors.textWhite,
+                          foregroundColor: AppColors.darkTextPrimary,
                           side: const BorderSide(
                             color: Color(0xFF444444),
                             width: 1.5,
@@ -284,7 +284,9 @@ class ExportImportScreen extends StatelessWidget {
                       child: Text(
                         'Importing replaces existing data. You will be asked to confirm.',
                         style: TextStyle(
-                          color: AppColors.textWhite.withValues(alpha: 0.9),
+                          color: AppColors.darkTextPrimary.withValues(
+                            alpha: 0.9,
+                          ),
                           fontSize: 13,
                           height: 1.4,
                           fontWeight: FontWeight.w500,

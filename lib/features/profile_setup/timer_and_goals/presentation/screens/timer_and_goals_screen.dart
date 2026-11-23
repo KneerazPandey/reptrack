@@ -1,8 +1,8 @@
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:reptrack/core/router/app_routes.dart';
-import 'package:reptrack/core/theme/app_colors.dart';
 import 'package:reptrack/core/theme/app_spacing.dart';
+import 'package:reptrack/core/theme/theme_extensions.dart';
 import 'package:reptrack/core/widgets/reptrack_elevated_button.dart';
 
 class TimerAndGoalsScreen extends StatefulWidget {
@@ -23,7 +23,7 @@ class TimerAndGoalsScreenState extends State<TimerAndGoalsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.darkBg,
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -46,13 +46,13 @@ class TimerAndGoalsScreenState extends State<TimerAndGoalsScreen> {
                               child: Container(
                                 width: 40,
                                 height: 40,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFF1A1A1A),
+                                decoration: BoxDecoration(
+                                  color: context.colors.primary,
                                   shape: BoxShape.circle,
                                 ),
-                                child: const Icon(
+                                child: Icon(
                                   Icons.arrow_back_ios_new_rounded,
-                                  color: AppColors.textWhite,
+                                  color: context.colors.onPrimary,
                                   size: 18,
                                 ),
                               ),
@@ -70,12 +70,12 @@ class TimerAndGoalsScreenState extends State<TimerAndGoalsScreen> {
                                   margin: const EdgeInsets.only(right: 6),
                                   decoration: BoxDecoration(
                                     color: isActive
-                                        ? AppColors.neonPrimary
+                                        ? context.colors.primary
                                         : isPast
-                                        ? AppColors.neonPrimary.withValues(
+                                        ? context.colors.primary.withValues(
                                             alpha: 0.5,
                                           )
-                                        : const Color(0xFF2A2A2A),
+                                        : context.colors.onSurfaceVariant,
                                     borderRadius: BorderRadius.circular(4),
                                   ),
                                 );
@@ -87,10 +87,10 @@ class TimerAndGoalsScreenState extends State<TimerAndGoalsScreen> {
                         const SizedBox(height: AppSpacing.xl * 1.5),
 
                         // ---------- Text Content ----------
-                        const Text(
+                        Text(
                           'STEP 3 OF 4',
                           style: TextStyle(
-                            color: AppColors.textGrey,
+                            color: context.colors.onSurface,
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
                             letterSpacing: 1.2,
@@ -98,10 +98,10 @@ class TimerAndGoalsScreenState extends State<TimerAndGoalsScreen> {
                         ),
 
                         const SizedBox(height: AppSpacing.xs),
-                        const Text(
+                        Text(
                           'Your training rhythm',
                           style: TextStyle(
-                            color: AppColors.textWhite,
+                            color: context.colors.onSurface,
                             fontSize: 28,
                             fontWeight: FontWeight.w800,
                             height: 1.2,
@@ -110,10 +110,10 @@ class TimerAndGoalsScreenState extends State<TimerAndGoalsScreen> {
                         ),
 
                         const SizedBox(height: AppSpacing.sm),
-                        const Text(
+                        Text(
                           'Sets the default rest between sets and your weekly target.',
                           style: TextStyle(
-                            color: AppColors.textGrey,
+                            color: context.colors.onSurfaceVariant,
                             fontSize: 14,
                             height: 1.4,
                           ),
@@ -125,7 +125,7 @@ class TimerAndGoalsScreenState extends State<TimerAndGoalsScreen> {
                         Container(
                           padding: const EdgeInsets.all(AppSpacing.lg),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF1A1A1A),
+                            color: context.colors.surface,
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: Column(
@@ -136,16 +136,16 @@ class TimerAndGoalsScreenState extends State<TimerAndGoalsScreen> {
                                 children: [
                                   Row(
                                     children: [
-                                      const Icon(
+                                      Icon(
                                         Icons.timer_outlined,
-                                        color: AppColors.neonPrimary,
+                                        color: context.colors.primary,
                                         size: 20,
                                       ),
                                       const SizedBox(width: AppSpacing.xs),
                                       Text(
                                         'Default rest timer',
-                                        style: const TextStyle(
-                                          color: AppColors.textWhite,
+                                        style: TextStyle(
+                                          color: context.colors.onSurface,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
                                         ),
@@ -156,8 +156,8 @@ class TimerAndGoalsScreenState extends State<TimerAndGoalsScreen> {
                                     _selectedRestIndex == -1
                                         ? 'Custom'
                                         : '${_restOptions[_selectedRestIndex]}s',
-                                    style: const TextStyle(
-                                      color: AppColors.textWhite,
+                                    style: TextStyle(
+                                      color: context.colors.onSurface,
                                       fontSize: 18,
                                       fontWeight: FontWeight.w700,
                                     ),
@@ -187,7 +187,7 @@ class TimerAndGoalsScreenState extends State<TimerAndGoalsScreen> {
                         Container(
                           padding: const EdgeInsets.all(AppSpacing.lg),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF1A1A1A),
+                            color: context.colors.surface,
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: Column(
@@ -199,16 +199,16 @@ class TimerAndGoalsScreenState extends State<TimerAndGoalsScreen> {
                                 children: [
                                   Row(
                                     children: [
-                                      const Icon(
+                                      Icon(
                                         Icons.calendar_today_outlined,
-                                        color: AppColors.neonPrimary,
+                                        color: context.colors.primary,
                                         size: 20,
                                       ),
                                       const SizedBox(width: AppSpacing.xs),
-                                      const Text(
+                                      Text(
                                         'Weekly goal',
                                         style: TextStyle(
-                                          color: AppColors.textWhite,
+                                          color: context.colors.onSurface,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
                                         ),
@@ -217,8 +217,8 @@ class TimerAndGoalsScreenState extends State<TimerAndGoalsScreen> {
                                   ),
                                   Text(
                                     '$_selectedDays ${_selectedDays == 1 ? 'day' : 'days'}',
-                                    style: const TextStyle(
-                                      color: AppColors.textWhite,
+                                    style: TextStyle(
+                                      color: context.colors.onSurface,
                                       fontSize: 18,
                                       fontWeight: FontWeight.w700,
                                     ),
@@ -243,13 +243,13 @@ class TimerAndGoalsScreenState extends State<TimerAndGoalsScreen> {
                                       height: 38,
                                       decoration: BoxDecoration(
                                         color: isSelected
-                                            ? AppColors.neonPrimary
+                                            ? context.colors.primary
                                             : Colors.transparent,
                                         shape: BoxShape.circle,
                                         border: Border.all(
                                           color: isSelected
                                               ? Colors.transparent
-                                              : const Color(0xFF333333),
+                                              : context.colors.onSurfaceVariant,
                                           width: 1.5,
                                         ),
                                       ),
@@ -258,8 +258,8 @@ class TimerAndGoalsScreenState extends State<TimerAndGoalsScreen> {
                                         day.toString(),
                                         style: TextStyle(
                                           color: isSelected
-                                              ? Colors.black
-                                              : AppColors.textWhite,
+                                              ? context.colors.onPrimary
+                                              : context.colors.onSurface,
                                           fontSize: 14,
                                           fontWeight: isSelected
                                               ? FontWeight.w700
@@ -303,17 +303,21 @@ class TimerAndGoalsScreenState extends State<TimerAndGoalsScreen> {
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.neonPrimary : Colors.transparent,
+          color: isSelected ? context.colors.primary : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: isSelected ? Colors.transparent : const Color(0xFF333333),
+            color: isSelected
+                ? Colors.transparent
+                : context.colors.onSurfaceVariant,
             width: 1.5,
           ),
         ),
         child: Text(
           label,
           style: TextStyle(
-            color: isSelected ? Colors.black : AppColors.textWhite,
+            color: isSelected
+                ? context.colors.onPrimary
+                : context.colors.onSurface,
             fontSize: 14,
             fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
           ),
@@ -330,17 +334,21 @@ class TimerAndGoalsScreenState extends State<TimerAndGoalsScreen> {
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.neonPrimary : Colors.transparent,
+          color: isSelected ? context.colors.primary : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: isSelected ? Colors.transparent : const Color(0xFF333333),
+            color: isSelected
+                ? Colors.transparent
+                : context.colors.onSurfaceVariant,
             width: 1.5,
           ),
         ),
         child: Text(
           label,
           style: TextStyle(
-            color: isSelected ? Colors.black : AppColors.textWhite,
+            color: isSelected
+                ? context.colors.onPrimary
+                : context.colors.onSurface,
             fontSize: 14,
             fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
           ),

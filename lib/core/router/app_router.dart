@@ -2,10 +2,11 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:reptrack/core/router/app_routes.dart';
+import 'package:reptrack/core/theme/theme_extensions.dart';
 import 'package:reptrack/features/main/presentation/screens/main_shell.dart';
+import 'package:reptrack/features/main/profile_and_settings/appearance/presentation/screens/appearance_screen.dart';
 import 'package:reptrack/features/main/profile_and_settings/export_import/presentation/screens/export_import_screen.dart';
 import 'package:reptrack/features/main/profile_and_settings/presentation/screens/main_profile_and_settings_screen.dart';
-import 'package:reptrack/features/onboarding/presentation/screens/onboarding_screen.dart';
 import 'package:reptrack/features/profile_setup/first_split/presentation/screens/pick_split_screen.dart';
 import 'package:reptrack/features/profile_setup/profile/presentation/screens/profile_setup_screen.dart';
 import 'package:reptrack/features/profile_setup/timer_and_goals/presentation/screens/timer_and_goals_screen.dart';
@@ -17,7 +18,7 @@ class AppRouter {
   AppRouter._();
 
   static final GoRouter router = GoRouter(
-    initialLocation: AppRoutes.welcome,
+    initialLocation: AppRoutes.splash,
     redirect: (BuildContext context, GoRouterState state) {
       return null;
     },
@@ -26,12 +27,6 @@ class AppRouter {
         path: AppRoutes.splash,
         name: 'splash',
         builder: (BuildContext context, GoRouterState state) => SplashScreen(),
-      ),
-      GoRoute(
-        path: AppRoutes.onboarding,
-        name: 'onboarding',
-        builder: (BuildContext context, GoRouterState state) =>
-            OnboardingScreen(),
       ),
       GoRoute(
         path: AppRoutes.welcome,
@@ -71,6 +66,13 @@ class AppRouter {
             ExportImportScreen(),
       ),
 
+      GoRoute(
+        path: AppRoutes.appearance,
+        name: 'Appearance',
+        builder: (BuildContext context, GoRouterState state) =>
+            AppearanceScreen(),
+      ),
+
       // MAIN APP WITH BOTTOM NAVIGATION
       StatefulShellRoute.indexedStack(
         builder:
@@ -87,8 +89,10 @@ class AppRouter {
             routes: [
               GoRoute(
                 path: AppRoutes.home,
-                builder: (context, state) =>
-                    const Scaffold(body: Center(child: Text('Home Screen'))),
+                builder: (context, state) => Scaffold(
+                  body: Center(child: Text('Home Screen')),
+                  backgroundColor: context.theme.scaffoldBackgroundColor,
+                ),
               ),
             ],
           ),
@@ -139,7 +143,7 @@ class AppRouter {
     final hasProfile =
         profileBox.get('name') != null &&
         (profileBox.get('name') as String).isNotEmpty;
-    return hasProfile ? AppRoutes.home : AppRoutes.onboarding;
+    return hasProfile ? AppRoutes.home : AppRoutes.welcome;
   }
 }
 

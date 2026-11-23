@@ -1,8 +1,8 @@
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:reptrack/core/router/app_routes.dart';
-import 'package:reptrack/core/theme/app_colors.dart';
 import 'package:reptrack/core/theme/app_spacing.dart';
+import 'package:reptrack/core/theme/theme_extensions.dart';
 import 'package:reptrack/core/widgets/reptrack_elevated_button.dart';
 
 class PickSplitScreen extends StatefulWidget {
@@ -30,7 +30,7 @@ class _PickSplitScreenState extends State<PickSplitScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.darkBg,
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -53,13 +53,13 @@ class _PickSplitScreenState extends State<PickSplitScreen> {
                               child: Container(
                                 width: 40,
                                 height: 40,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFF1A1A1A),
+                                decoration: BoxDecoration(
+                                  color: context.colors.primary,
                                   shape: BoxShape.circle,
                                 ),
-                                child: const Icon(
+                                child: Icon(
                                   Icons.arrow_back_ios_new_rounded,
-                                  color: AppColors.textWhite,
+                                  color: context.colors.onPrimary,
                                   size: 18,
                                 ),
                               ),
@@ -77,12 +77,12 @@ class _PickSplitScreenState extends State<PickSplitScreen> {
                                   margin: const EdgeInsets.only(right: 6),
                                   decoration: BoxDecoration(
                                     color: isActive
-                                        ? AppColors.neonPrimary
+                                        ? context.colors.primary
                                         : isPast
-                                        ? AppColors.neonPrimary.withValues(
+                                        ? context.colors.primary.withValues(
                                             alpha: 0.5,
                                           )
-                                        : const Color(0xFF2A2A2A),
+                                        : context.colors.onSurfaceVariant,
                                     borderRadius: BorderRadius.circular(4),
                                   ),
                                 );
@@ -94,20 +94,20 @@ class _PickSplitScreenState extends State<PickSplitScreen> {
                         const SizedBox(height: AppSpacing.xl * 1.5),
 
                         // ---------- Text Content ----------
-                        const Text(
+                        Text(
                           'STEP 4 OF 4',
                           style: TextStyle(
-                            color: AppColors.textGrey,
+                            color: context.colors.onSurface,
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
                             letterSpacing: 1.2,
                           ),
                         ),
                         const SizedBox(height: AppSpacing.xs),
-                        const Text(
+                        Text(
                           'Pick a split',
                           style: TextStyle(
-                            color: AppColors.textWhite,
+                            color: context.colors.onSurface,
                             fontSize: 28,
                             fontWeight: FontWeight.w800,
                             height: 1.2,
@@ -116,10 +116,10 @@ class _PickSplitScreenState extends State<PickSplitScreen> {
                         ),
                         const SizedBox(height: AppSpacing.sm),
 
-                        const Text(
+                        Text(
                           'Start from a template. Edit it anytime.',
                           style: TextStyle(
-                            color: AppColors.textGrey,
+                            color: context.colors.onSurfaceVariant,
                             fontSize: 14,
                             height: 1.4,
                           ),
@@ -160,24 +160,24 @@ class _PickSplitScreenState extends State<PickSplitScreen> {
                                 vertical: 16,
                               ),
                               decoration: BoxDecoration(
-                                color: const Color(0xFF1A1A1A),
+                                color: context.colors.surface,
                                 borderRadius: BorderRadius.circular(12),
                               ),
-                              child: const Row(
+                              child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     'Build my own',
                                     style: TextStyle(
-                                      color: AppColors.textWhite,
+                                      color: context.colors.onSurface,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                   Icon(
                                     Icons.add_rounded,
-                                    color: AppColors.textWhite,
+                                    color: context.colors.onSurface,
                                     size: 24,
                                   ),
                                 ],
@@ -216,11 +216,13 @@ class _PickSplitScreenState extends State<PickSplitScreen> {
       duration: const Duration(milliseconds: 200),
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: const Color(0xFF1A1A1A),
+        color: context.colors.surface,
         borderRadius: BorderRadius.circular(12),
         // Outline neon green when selected
         border: Border.all(
-          color: isSelected ? AppColors.neonPrimary : Colors.transparent,
+          color: isSelected
+              ? context.colors.primary
+              : context.colors.surfaceContainerHighest,
           width: 1.5,
         ),
       ),
@@ -233,8 +235,8 @@ class _PickSplitScreenState extends State<PickSplitScreen> {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
-                    color: AppColors.textWhite,
+                  style: TextStyle(
+                    color: context.colors.onSurface,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
@@ -242,8 +244,8 @@ class _PickSplitScreenState extends State<PickSplitScreen> {
                 const SizedBox(height: 4),
                 Text(
                   subtitle,
-                  style: const TextStyle(
-                    color: AppColors.textGrey,
+                  style: TextStyle(
+                    color: context.colors.onSurfaceVariant,
                     fontSize: 13,
                     fontWeight: FontWeight.w400,
                   ),
@@ -257,17 +259,21 @@ class _PickSplitScreenState extends State<PickSplitScreen> {
             width: 24,
             height: 24,
             decoration: BoxDecoration(
-              color: isSelected ? AppColors.neonPrimary : Colors.transparent,
+              color: isSelected ? context.colors.primary : Colors.transparent,
               shape: BoxShape.circle,
               border: Border.all(
                 color: isSelected
-                    ? Colors.transparent
-                    : const Color(0xFF444444), // Visible outline for unselected
+                    ? context.colors.primary
+                    : context.colors.surfaceContainerHighest,
                 width: 2,
               ),
             ),
             child: isSelected
-                ? const Icon(Icons.check_rounded, size: 16, color: Colors.black)
+                ? Icon(
+                    Icons.check_rounded,
+                    size: 16,
+                    color: context.colors.onPrimary,
+                  )
                 : null,
           ),
         ],

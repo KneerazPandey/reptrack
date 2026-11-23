@@ -38,7 +38,9 @@ class CustomBottomNav extends StatelessWidget {
 
   Widget _buildNavItem(IconData icon, String label, int index) {
     final isSelected = currentIndex == index;
-    final color = isSelected ? AppColors.neonPrimary : AppColors.textGrey;
+    final color = isSelected
+        ? AppColors.primaryDark
+        : AppColors.darkTextSecondary;
 
     return GestureDetector(
       onTap: () => onTap(index),

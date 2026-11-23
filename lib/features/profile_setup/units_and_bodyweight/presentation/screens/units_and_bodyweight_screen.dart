@@ -3,6 +3,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:reptrack/core/router/app_routes.dart';
 import 'package:reptrack/core/theme/app_colors.dart';
 import 'package:reptrack/core/theme/app_spacing.dart';
+import 'package:reptrack/core/theme/theme_extensions.dart';
 import 'package:reptrack/core/widgets/reptrack_elevated_button.dart';
 
 class UnitsAndBodyweightScreen extends StatefulWidget {
@@ -36,7 +37,7 @@ class _UnitsAndBodyweightScreenState extends State<UnitsAndBodyweightScreen> {
     final isKg = _selectedUnitIndex == 0;
 
     return Scaffold(
-      backgroundColor: AppColors.darkBg,
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Padding(
@@ -61,13 +62,13 @@ class _UnitsAndBodyweightScreenState extends State<UnitsAndBodyweightScreen> {
                               child: Container(
                                 width: 40,
                                 height: 40,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFF1A1A1A),
+                                decoration: BoxDecoration(
+                                  color: context.colors.primary,
                                   shape: BoxShape.circle,
                                 ),
-                                child: const Icon(
+                                child: Icon(
                                   Icons.arrow_back_ios_new_rounded,
-                                  color: AppColors.textWhite,
+                                  color: context.colors.onPrimary,
                                   size: 18,
                                 ),
                               ),
@@ -85,12 +86,12 @@ class _UnitsAndBodyweightScreenState extends State<UnitsAndBodyweightScreen> {
                                   margin: const EdgeInsets.only(right: 6),
                                   decoration: BoxDecoration(
                                     color: isActive
-                                        ? AppColors.neonPrimary
+                                        ? context.colors.primary
                                         : isPast
-                                        ? AppColors.neonPrimary.withValues(
+                                        ? context.colors.primary.withValues(
                                             alpha: 0.5,
                                           )
-                                        : const Color(0xFF2A2A2A),
+                                        : context.colors.onSurfaceVariant,
                                     borderRadius: BorderRadius.circular(4),
                                   ),
                                 );
@@ -101,20 +102,20 @@ class _UnitsAndBodyweightScreenState extends State<UnitsAndBodyweightScreen> {
 
                         const SizedBox(height: AppSpacing.xl * 1.5),
 
-                        const Text(
+                        Text(
                           'STEP 2 OF 4',
                           style: TextStyle(
-                            color: AppColors.textGrey,
+                            color: context.colors.onSurfaceVariant,
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
                             letterSpacing: 1.2,
                           ),
                         ),
                         const SizedBox(height: AppSpacing.xs),
-                        const Text(
+                        Text(
                           'Units and bodyweight',
                           style: TextStyle(
-                            color: AppColors.textWhite,
+                            color: context.colors.onSurface,
                             fontSize: 28,
                             fontWeight: FontWeight.w800,
                             height: 1.2,
@@ -122,10 +123,10 @@ class _UnitsAndBodyweightScreenState extends State<UnitsAndBodyweightScreen> {
                           ),
                         ),
                         const SizedBox(height: AppSpacing.sm),
-                        const Text(
+                        Text(
                           'Used for weights, charts and exports. You can change units later in settings.',
                           style: TextStyle(
-                            color: AppColors.textGrey,
+                            color: context.colors.onSurfaceVariant,
                             fontSize: 14,
                             height: 1.4,
                           ),
@@ -133,10 +134,10 @@ class _UnitsAndBodyweightScreenState extends State<UnitsAndBodyweightScreen> {
                         const SizedBox(height: AppSpacing.xl * 1.5),
 
                         // ---------- Weight Unit Toggle ----------
-                        const Text(
+                        Text(
                           'WEIGHT UNIT',
                           style: TextStyle(
-                            color: AppColors.textGrey,
+                            color: context.colors.onSurfaceVariant,
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
                             letterSpacing: 1.0,
@@ -148,7 +149,7 @@ class _UnitsAndBodyweightScreenState extends State<UnitsAndBodyweightScreen> {
                           height: 52,
                           padding: const EdgeInsets.all(4),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF1A1A1A),
+                            color: context.colors.surfaceContainerHighest,
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Row(
@@ -161,10 +162,10 @@ class _UnitsAndBodyweightScreenState extends State<UnitsAndBodyweightScreen> {
                         const SizedBox(height: AppSpacing.xl),
 
                         // ---------- Bodyweight Input ----------
-                        const Text(
+                        Text(
                           'BODYWEIGHT',
                           style: TextStyle(
-                            color: AppColors.textGrey,
+                            color: context.colors.onSurfaceVariant,
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
                             letterSpacing: 1.0,
@@ -176,15 +177,17 @@ class _UnitsAndBodyweightScreenState extends State<UnitsAndBodyweightScreen> {
                           keyboardType: const TextInputType.numberWithOptions(
                             decimal: true,
                           ),
-                          style: const TextStyle(
-                            color: AppColors.textWhite,
+                          style: TextStyle(
+                            // 👈 Main input text (White in Dark / Black in Light)
+                            color: context.colors.onSurface,
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
                           ),
-                          cursorColor: AppColors.neonPrimary,
+                          cursorColor: context.colors.primary,
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: const Color(0xFF1A1A1A),
+                            // 👈 Input field background (Dark grey in Dark / Light grey in Light)
+                            fillColor: context.colors.surfaceContainerHighest,
                             contentPadding: const EdgeInsets.symmetric(
                               horizontal: AppSpacing.md,
                               vertical: 16,
@@ -198,26 +201,28 @@ class _UnitsAndBodyweightScreenState extends State<UnitsAndBodyweightScreen> {
                                 widthFactor: 1.0,
                                 child: Text(
                                   isKg ? 'kg' : 'lbs',
-                                  style: const TextStyle(
-                                    color: AppColors.textGrey,
+                                  style: TextStyle(
+                                    // 👈 Secondary text (Grey in both modes)
+                                    color: context.colors.onSurfaceVariant,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
                               ),
                             ),
-                            // Dynamic Border (Neon green when focused)
+                            // Default Border (Transparent to match your design)
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Colors.transparent,
                                 width: 1.5,
                               ),
                             ),
+                            // Focused Border (Neon Green / Forest Green when typing)
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
-                              borderSide: const BorderSide(
-                                color: AppColors.neonPrimary,
+                              borderSide: BorderSide(
+                                color: context.colors.primary,
                                 width: 1.5,
                               ),
                             ),
@@ -225,10 +230,10 @@ class _UnitsAndBodyweightScreenState extends State<UnitsAndBodyweightScreen> {
                         ),
 
                         const SizedBox(height: AppSpacing.xs),
-                        const Text(
+                        Text(
                           'Optional. Starts your bodyweight chart.',
                           style: TextStyle(
-                            color: AppColors.textGrey,
+                            color: context.colors.onSurfaceVariant,
                             fontSize: 12,
                           ),
                         ),
@@ -239,7 +244,7 @@ class _UnitsAndBodyweightScreenState extends State<UnitsAndBodyweightScreen> {
                         Container(
                           padding: const EdgeInsets.all(AppSpacing.md),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF1A1A1A),
+                            color: context.colors.surface,
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Row(
@@ -247,23 +252,25 @@ class _UnitsAndBodyweightScreenState extends State<UnitsAndBodyweightScreen> {
                               Container(
                                 padding: const EdgeInsets.all(8),
                                 decoration: BoxDecoration(
-                                  color: AppColors.neonPrimary.withValues(
+                                  color: context.colors.primary.withValues(
                                     alpha: 0.1,
                                   ),
                                   shape: BoxShape.circle,
                                 ),
-                                child: const Icon(
+                                child: Icon(
                                   Icons.shield_outlined,
-                                  color: AppColors.neonPrimary,
+
+                                  color: context.colors.primary,
                                   size: 20,
                                 ),
                               ),
                               const SizedBox(width: AppSpacing.sm),
-                              const Expanded(
+
+                              Expanded(
                                 child: Text(
                                   'Private by design. Nothing leaves your phone.',
                                   style: TextStyle(
-                                    color: AppColors.textWhite,
+                                    color: context.colors.onSurface,
                                     fontSize: 13,
                                     fontWeight: FontWeight.w500,
                                     height: 1.4,
@@ -308,14 +315,14 @@ class _UnitsAndBodyweightScreenState extends State<UnitsAndBodyweightScreen> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           decoration: BoxDecoration(
-            color: isActive ? AppColors.neonPrimary : Colors.transparent,
+            color: isActive ? context.colors.primary : Colors.transparent,
             borderRadius: BorderRadius.circular(8),
           ),
           alignment: Alignment.center,
           child: Text(
             text,
             style: TextStyle(
-              color: isActive ? Colors.black : AppColors.textGrey,
+              color: isActive ? Colors.black : AppColors.darkTextSecondary,
               fontSize: 14,
               fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
             ),

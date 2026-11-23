@@ -1,5 +1,5 @@
 import 'package:material_ui/material_ui.dart';
-import 'package:reptrack/core/theme/app_colors.dart';
+import 'package:reptrack/core/theme/theme_extensions.dart';
 
 class RepTrackElevatedButton extends StatelessWidget {
   final double height;
@@ -21,8 +21,8 @@ class RepTrackElevatedButton extends StatelessWidget {
       child: FilledButton(
         onPressed: onPressed,
         style: FilledButton.styleFrom(
-          backgroundColor: AppColors.neonPrimary,
-          foregroundColor: Colors.black,
+          backgroundColor: context.colors.primary,
+          foregroundColor: context.colors.onPrimary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
