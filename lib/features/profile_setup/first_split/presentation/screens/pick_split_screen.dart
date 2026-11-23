@@ -1,4 +1,6 @@
+import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:reptrack/core/router/app_routes.dart';
 import 'package:reptrack/core/theme/app_colors.dart';
 import 'package:reptrack/core/theme/app_spacing.dart';
 import 'package:reptrack/core/widgets/reptrack_elevated_button.dart';
@@ -186,7 +188,9 @@ class _PickSplitScreenState extends State<PickSplitScreen> {
 
                         SizedBox(height: 30),
                         RepTrackElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            context.go(AppRoutes.home);
+                          },
                           name: 'Start training',
                         ),
                         SizedBox(height: 20),

@@ -2,6 +2,9 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:reptrack/core/router/app_routes.dart';
+import 'package:reptrack/features/main/presentation/screens/main_shell.dart';
+import 'package:reptrack/features/main/profile_and_settings/export_import/presentation/screens/export_import_screen.dart';
+import 'package:reptrack/features/main/profile_and_settings/presentation/screens/main_profile_and_settings_screen.dart';
 import 'package:reptrack/features/onboarding/presentation/screens/onboarding_screen.dart';
 import 'package:reptrack/features/profile_setup/first_split/presentation/screens/pick_split_screen.dart';
 import 'package:reptrack/features/profile_setup/profile/presentation/screens/profile_setup_screen.dart';
@@ -29,12 +32,6 @@ class AppRouter {
         name: 'onboarding',
         builder: (BuildContext context, GoRouterState state) =>
             OnboardingScreen(),
-      ),
-      GoRoute(
-        path: AppRoutes.home,
-        name: 'home',
-        builder: (BuildContext context, GoRouterState state) =>
-            const _PlaceholderScreen('Home'),
       ),
       GoRoute(
         path: AppRoutes.welcome,
@@ -65,6 +62,74 @@ class AppRouter {
         name: 'Pick Split',
         builder: (BuildContext context, GoRouterState state) =>
             PickSplitScreen(),
+      ),
+
+      GoRoute(
+        path: AppRoutes.exportImport,
+        name: 'Export Import',
+        builder: (BuildContext context, GoRouterState state) =>
+            ExportImportScreen(),
+      ),
+
+      // MAIN APP WITH BOTTOM NAVIGATION
+      StatefulShellRoute.indexedStack(
+        builder:
+            (
+              BuildContext context,
+              GoRouterState state,
+              StatefulNavigationShell navigationShell,
+            ) {
+              return MainShell(navigationShell: navigationShell);
+            },
+        branches: [
+          // Tab 1: Home
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.home,
+                builder: (context, state) =>
+                    const Scaffold(body: Center(child: Text('Home Screen'))),
+              ),
+            ],
+          ),
+          // Tab 2: Plan
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.plan,
+                builder: (context, state) => const _PlaceholderScreen('Plan'),
+              ),
+            ],
+          ),
+          // Tab 3: History
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.history,
+                builder: (context, state) =>
+                    const _PlaceholderScreen('History'),
+              ),
+            ],
+          ),
+          // Tab 4: Stats
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.status,
+                builder: (context, state) => const _PlaceholderScreen('Status'),
+              ),
+            ],
+          ),
+          // Tab 5: Profile
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.profile,
+                builder: (context, state) => const ProfileScreen(),
+              ),
+            ],
+          ),
+        ],
       ),
     ],
   );
